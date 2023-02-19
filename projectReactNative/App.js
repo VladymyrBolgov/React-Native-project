@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
+  Image,
   View,
   Text,
   TextInput,
@@ -30,6 +31,10 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require('./staticImages/Photo BG.png')} />
+       
         <View style={styles.box}>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -75,7 +80,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ecf0f1",
-    // background: url(photo-1536528087222-ef43dd3bb0f3.jpg),
+  },
+  image: {
+    width: 375,
+    height: 812,
   },
 
   box: {
@@ -83,10 +91,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FFFFFF",
-
+ 
     width: 375,
     height: 549,
-    // top: 125,
+    
     
   },
 
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 16,
   },
+
   title: {
     marginTop: 16,
     fontSize: 16,
@@ -121,7 +130,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     padding: 16,
-    marginTop: 43,
+    marginTop: 33,
     backgroundColor: "#FF6C00",
     borderRadius: 100,
   },
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#212121",
     borderRadius: 100,
     marginTop: 66,
-    
+    marginBottom: 8,
     alignSelf: 'center'
   }
 });
