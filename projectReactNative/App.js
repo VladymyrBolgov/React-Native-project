@@ -13,7 +13,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-
 export default function App() {
 
   const [name, setName] = useState("");
@@ -70,8 +69,6 @@ export default function App() {
                     <Text style={styles.link}>Войти</Text>
                   </TouchableOpacity>
                 </View>
-
-                <View style={styles.line}></View>
             </KeyboardAvoidingView>
           </View>
             
@@ -84,8 +81,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "#ecf0f1",
     
   },
@@ -163,14 +158,4 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 16,
   },
-//   line: {
-//     width: 134,
-//     height: 5,
-//     bottom: 8,
-//     backgroundColor: "#212121",
-//     borderRadius: 100,
-//     marginTop: 66,
-//     marginBottom: 8,
-//     alignSelf: 'center'
-//   }
 });
