@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Image,
+  // Image,
+  ImageBackground,
   View,
   Text,
   TextInput,
@@ -31,10 +32,13 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Image
+        <ImageBackground
           style={styles.image}
-          source={require('./staticImages/Photo BG.png')} />
-       
+          source={require('./staticImages/Photo BG.png')}>
+        {/* <Image
+          style={styles.image}
+          source={require('./staticImages/Photo BG.png')} /> */}
+          </ImageBackground>
         <View style={styles.box}>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -49,7 +53,7 @@ export default function App() {
               <TextInput
               value={email}
                 onChangeText={emailHandler}
-                placeholder="Адрес єлектронной почты"
+                placeholder="Адрес электронной почты"
                 keyboardType="email-address"
                 style={styles.input}
               />
@@ -69,6 +73,7 @@ export default function App() {
               <View style={styles.line}></View>
           </KeyboardAvoidingView>
         </View>
+      {/* </ImageBackground> */}
       </View>
     </TouchableWithoutFeedback>
   );
