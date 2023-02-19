@@ -32,55 +32,50 @@ export default function App() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <ImageBackground
-          style={styles.image}
-          source={require('./staticImages/Photo BG.png')}>
-          </ImageBackground>
-
-        <View style={styles.box}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
-            <Text style={styles.h1}>Регистрация</Text>
-            <TextInput
-                value={name}
-                onChangeText={nameHandler}
-                placeholder="Логин"
-                style={styles.input}
-              />
+            style={styles.image}
+            source={require("./staticImages/Photo BG.png")}>
+        
+          <View style={styles.box}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+              >
+              <Text style={styles.h1}>Регистрация</Text>
               <TextInput
-              value={email}
-                onChangeText={emailHandler}
-                placeholder="Адрес электронной почты"
-                keyboardType="email-address"
-                style={styles.input}
-              />
+                  value={name}
+                  onChangeText={nameHandler}
+                  placeholder="Логин"
+                  style={styles.input}
+                />
                 <TextInput
-                value={password}
-                onChangeText={passwordHandler}
-                placeholder="Пароль"
-                secureTextEntry={true}
-                style={styles.input}
-              />
-              <TouchableOpacity style={styles.button} onPress={onLogin}>
-                <Text style={styles.buttonText}>Зарегистрироваться</Text>
-              </TouchableOpacity>
-
-              <View style={styles.display}>
-                <Text style={styles.title}>Уже есть аккаунт?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                  <Text style={styles.link}>Войти</Text>
+                value={email}
+                  onChangeText={emailHandler}
+                  placeholder="Адрес электронной почты"
+                  keyboardType="email-address"
+                  style={styles.input}
+                />
+                  <TextInput
+                  value={password}
+                  onChangeText={passwordHandler}
+                  placeholder="Пароль"
+                  secureTextEntry={true}
+                  style={styles.input}
+                />
+                <TouchableOpacity style={styles.button} onPress={onLogin}>
+                  <Text style={styles.buttonText}>Зарегистрироваться</Text>
                 </TouchableOpacity>
-              </View>
 
-              {/* <View>
-                <Text style={styles.title}>Уже есть аккаунт? Войти</Text>
-              </View> */}
+                <View style={styles.display}>
+                  <Text style={styles.title}>Уже есть аккаунт?</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.link}>Войти</Text>
+                  </TouchableOpacity>
+                </View>
 
-              {/* <View style={styles.line}></View> */}
-          </KeyboardAvoidingView>
-        </View>
-          
-      {/* </ImageBackground> */}
+                <View style={styles.line}></View>
+            </KeyboardAvoidingView>
+          </View>
+            
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -89,7 +84,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
     // justifyContent: "center",
     backgroundColor: "#ecf0f1",
     
@@ -98,20 +93,17 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    width: 375,
-    height: 812,
   },
 
   box: {
-    position: "absolute",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    width: 368, // костыль
+    width: 360, // костыль
     height: 549,
-    marginTop: 245,
+    marginTop: 205, // костыль
   },
 
   h1: {
