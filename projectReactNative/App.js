@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  // Image,
   ImageBackground,
   View,
   Text,
@@ -35,10 +34,8 @@ export default function App() {
         <ImageBackground
           style={styles.image}
           source={require('./staticImages/Photo BG.png')}>
-        {/* <Image
-          style={styles.image}
-          source={require('./staticImages/Photo BG.png')} /> */}
-          </ImageBackground>
+          {/* </ImageBackground> */}
+
         <View style={styles.box}>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -73,7 +70,8 @@ export default function App() {
               <View style={styles.line}></View>
           </KeyboardAvoidingView>
         </View>
-      {/* </ImageBackground> */}
+          
+      </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -85,6 +83,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ecf0f1",
+    
   },
   image: {
     width: 375,
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
   },
 
   box: {
+    
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
@@ -99,13 +99,12 @@ const styles = StyleSheet.create({
  
     width: 375,
     height: 549,
-    
-    
+    marginTop: 245,
   },
 
   h1: {
     marginTop: 92,
-    marginBottom: 16,
+    marginBottom: 33,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontWeight: '500',
@@ -122,22 +121,23 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: "black",
-    marginBottom: 10,
+    marginBottom: 16,
     borderRadius: 10,
-    marginTop: 16,
   },
 
   title: {
     marginTop: 16,
     fontSize: 16,
     textAlign: "center",
+
   },
   button: {
     alignItems: "center",
     padding: 16,
-    marginTop: 33,
+    marginTop: 27, // костыль
     backgroundColor: "#FF6C00",
     borderRadius: 100,
+
   },
   buttonText: {
     fontFamily: 'Roboto',
