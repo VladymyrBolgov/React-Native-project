@@ -64,10 +64,19 @@ export default function App() {
               <TouchableOpacity style={styles.button} onPress={onLogin}>
                 <Text style={styles.buttonText}>Зарегистрироваться</Text>
               </TouchableOpacity>
-              <View>
-                <Text style={styles.title}>Уже есть аккаунт? Войти</Text>
+
+              <View style={styles.display}>
+                <Text style={styles.title}>Уже есть аккаунт?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                  <Text style={styles.link}>Войти</Text>
+                </TouchableOpacity>
               </View>
-              <View style={styles.line}></View>
+
+              {/* <View>
+                <Text style={styles.title}>Уже есть аккаунт? Войти</Text>
+              </View> */}
+
+              {/* <View style={styles.line}></View> */}
           </KeyboardAvoidingView>
         </View>
           
@@ -125,12 +134,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  title: {
-    marginTop: 16,
-    fontSize: 16,
-    textAlign: "center",
-
-  },
   button: {
     alignItems: "center",
     padding: 16,
@@ -148,14 +151,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
   },
-  line: {
-    width: 134,
-    height: 5,
-    bottom: 8,
-    backgroundColor: "#212121",
-    borderRadius: 100,
-    marginTop: 66,
-    marginBottom: 8,
-    alignSelf: 'center'
-  }
+
+  title: {
+    marginTop: 16,
+    fontSize: 16,
+    // textAlign: "center",
+  },
+
+  display: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 78,
+  },
+
+  link: {
+    fontSize: 16,
+  },
+//   line: {
+//     width: 134,
+//     height: 5,
+//     bottom: 8,
+//     backgroundColor: "#212121",
+//     borderRadius: 100,
+//     marginTop: 66,
+//     marginBottom: 8,
+//     alignSelf: 'center'
+//   }
 });
