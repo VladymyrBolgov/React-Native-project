@@ -34,7 +34,7 @@ export default function App() {
         <ImageBackground
           style={styles.image}
           source={require('./staticImages/Photo BG.png')}>
-          {/* </ImageBackground> */}
+          </ImageBackground>
 
         <View style={styles.box}>
           <KeyboardAvoidingView
@@ -80,7 +80,7 @@ export default function App() {
           </KeyboardAvoidingView>
         </View>
           
-      </ImageBackground>
+      {/* </ImageBackground> */}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -90,23 +90,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     backgroundColor: "#ecf0f1",
     
   },
   image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
     width: 375,
     height: 812,
   },
 
   box: {
-    
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FFFFFF",
- 
-    width: 375,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    width: 368, // костыль
     height: 549,
     marginTop: 245,
   },
