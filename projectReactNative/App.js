@@ -12,27 +12,33 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function App() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const nameHandler = (text) => setName(text);
   const emailHandler = (text) => setEmail(text);
   const passwordHandler = (text) => setPassword(text);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const onLogin = () => {
     Alert.alert("Credentials", `${name} + ${email} + ${password}`);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
-            source={require("./staticImages/Photo BG.png")}>
+            source={require("./staticImages/Photo.png")}>
         
           <View style={styles.box}>
             <KeyboardAvoidingView
@@ -51,14 +57,21 @@ export default function App() {
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address"
                   style={styles.input}
-                />
+            />
+            <View style={styles.inputContainer}>
                   <TextInput
                   value={password}
                   onChangeText={passwordHandler}
                   placeholder="Пароль"
-                  secureTextEntry={true}
-                  style={styles.input}
+                //secureTextEntry={true}
+                secureTextEntry={!isPasswordVisible}
+                  style={styles.inputPassword}
                 />
+                <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                <MaterialCommunityIcons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="gray" />
+                </TouchableWithoutFeedback>
+              </View>
+              
                 <TouchableOpacity style={styles.button} onPress={onLogin}>
                   <Text style={styles.buttonText}>Зарегистрироваться</Text>
                 </TouchableOpacity>
@@ -74,7 +87,7 @@ export default function App() {
             
         </ImageBackground>
       </View>
-    </TouchableWithoutFeedback>
+       </TouchableWithoutFeedback> 
   );
 }
 
@@ -114,6 +127,7 @@ const styles = StyleSheet.create({
     color: '#212121',
   },
 
+  
   input: {
     width: 343,
     height: 50,
@@ -123,6 +137,25 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 10,
   },
+
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // paddingVertical: 10,
+    // paddingHorizontal: 20,
+  },
+
+  inputPassword: {
+    // flex: 1,
+    width: 343,
+    height: 50,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 16,
+    borderRadius: 10,
+  },
+  
 
   button: {
     alignItems: "center",
@@ -142,17 +175,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 
-  title: {
+  display: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: 'center',
+    marginBottom: 78,
     marginTop: 16,
-    fontSize: 16,
-    // textAlign: "center",
   },
 
-  display: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 78,
+  title: {
+    fontSize: 16,
+    marginRight: 5,
   },
 
   link: {
