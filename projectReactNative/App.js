@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
 
   h1: {
-    marginTop: 92,
+    marginTop: 80, //костыль
     marginBottom: 33,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
@@ -198,3 +198,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+
+
