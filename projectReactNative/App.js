@@ -57,19 +57,25 @@ export default function App() {
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address"
                   style={styles.input}
-            />
-            <View style={styles.inputContainer}>
-                  <TextInput
+              />
+              
+             <View style={styles.inputContainer}>
+                <TextInput
                   value={password}
                   onChangeText={passwordHandler}
                   placeholder="Пароль"
                 //secureTextEntry={true}
-                secureTextEntry={!isPasswordVisible}
+                  secureTextEntry={!isPasswordVisible}
                   style={styles.inputPassword}
                 />
-                <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                <MaterialCommunityIcons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color="gray" />
-                </TouchableWithoutFeedback>
+                <View style={styles.passwordIcon}>
+                  <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                      <MaterialCommunityIcons
+                        name={isPasswordVisible ? "eye-off" : "eye"}
+                        size={24}
+                        color="gray" />
+                    </TouchableWithoutFeedback>
+                </View>
               </View>
               
                 <TouchableOpacity style={styles.button} onPress={onLogin}>
@@ -127,7 +133,6 @@ const styles = StyleSheet.create({
     color: '#212121',
   },
 
-  
   input: {
     width: 343,
     height: 50,
@@ -141,12 +146,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // paddingVertical: 10,
-    // paddingHorizontal: 20,
   },
-
   inputPassword: {
-    // flex: 1,
+    flex: 1,
     width: 343,
     height: 50,
     padding: 10,
@@ -155,7 +157,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 10,
   },
-  
+  passwordIcon: {
+    position: "absolute",
+    right: 15,
+    top: 15,
+  },
 
   button: {
     alignItems: "center",
