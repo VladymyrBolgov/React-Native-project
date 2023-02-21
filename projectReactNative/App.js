@@ -48,7 +48,8 @@ export default function App() {
               <TextInput
                   value={name}
                   onChangeText={nameHandler}
-                  placeholder="Логин"
+                placeholder="Логин"
+                // textAlign={"center"}
                   style={styles.input}
                 />
                 <TextInput
@@ -141,7 +142,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     marginBottom: 16,
     borderRadius: 10,
+    // marginHorizontal: 16,
   },
+
 
   inputContainer: {
     flexDirection: 'row',
@@ -156,12 +159,14 @@ const styles = StyleSheet.create({
     borderColor: "black",
     marginBottom: 16,
     borderRadius: 10,
+    // marginHorizontal: 16,
   },
   passwordIcon: {
     position: "absolute",
     right: 15,
     top: 15,
   },
+
 
   button: {
     alignItems: "center",
@@ -180,6 +185,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
   },
+
 
   display: {
     flexDirection: 'row',
