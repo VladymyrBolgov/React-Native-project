@@ -11,6 +11,7 @@ import {
   Platform, 
   Alert,
   TouchableOpacity,
+
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -40,55 +41,59 @@ export default function App() {
             style={styles.image}
             source={require("./staticImages/Photo.png")}>
         
-          <View style={styles.box}>
-            <KeyboardAvoidingView
+          <View style={styles.box}> 
+            {/* для поднятие над клавиатурой */}
+            <KeyboardAvoidingView 
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Регистрация</Text>
-              <TextInput
-                  value={name}
-                  onChangeText={nameHandler}
-                placeholder="Логин"
-                // textAlign={"center"}
-                  style={styles.input}
-                />
-                <TextInput
-                value={email}
-                  onChangeText={emailHandler}
-                  placeholder="Адрес электронной почты"
-                  keyboardType="email-address"
-                  style={styles.input}
-              />
-              
-             <View style={styles.inputContainer}>
-                <TextInput
-                  value={password}
-                  onChangeText={passwordHandler}
-                  placeholder="Пароль"
-                //secureTextEntry={true}
-                  secureTextEntry={!isPasswordVisible}
-                  style={styles.inputPassword}
-                />
-                <View style={styles.passwordIcon}>
-                  <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                      <MaterialCommunityIcons
-                        name={isPasswordVisible ? "eye-off" : "eye"}
-                        size={24}
-                        color="gray" />
-                    </TouchableWithoutFeedback>
-                </View>
-              </View>
-              
-                <TouchableOpacity style={styles.button} onPress={onLogin}>
+              <View style={styles.form}>
+                    <TextInput
+                        value={name}
+                        onChangeText={nameHandler}
+                        placeholder="Логин"
+                      // textAlign={"center"}
+                        style={styles.input}
+                    />
+                  
+                      <TextInput
+                        value={email}
+                        onChangeText={emailHandler}
+                        placeholder="Адрес электронной почты"
+                        keyboardType="email-address"
+                        style={styles.input}
+                    />
+                    
+                  <View style={styles.inputContainer}>
+                      <TextInput
+                        value={password}
+                        onChangeText={passwordHandler}
+                        placeholder="Пароль"
+                      //secureTextEntry={true}
+                        secureTextEntry={!isPasswordVisible}
+                        style={styles.inputPassword}
+                      />
+                      <View style={styles.passwordIcon}>
+                        <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                            <MaterialCommunityIcons
+                              name={isPasswordVisible ? "eye-off" : "eye"}
+                              size={24}
+                              color="gray" />
+                          </TouchableWithoutFeedback>
+                      </View>
+                  </View>
+                
+                <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onLogin}>
                   <Text style={styles.buttonText}>Зарегистрироваться</Text>
                 </TouchableOpacity>
-
+              </View>
                 <View style={styles.display}>
                   <Text style={styles.title}>Уже есть аккаунт?</Text>
                   <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.link}>Войти</Text>
                   </TouchableOpacity>
-                </View>
+              </View>
+              
             </KeyboardAvoidingView>
           </View>
             
@@ -108,6 +113,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
+
   },
 
   box: {
@@ -134,15 +140,19 @@ const styles = StyleSheet.create({
     color: '#212121',
   },
 
+  form: {
+    marginHorizontal: 16,
+    
+  }, 
+
   input: {
-    width: 343,
+    width: 343,  // без box надо закоментить
     height: 50,
     padding: 10,
     borderWidth: 1,
     borderColor: "black",
     marginBottom: 16,
     borderRadius: 10,
-    // marginHorizontal: 16,
   },
 
 
@@ -152,14 +162,13 @@ const styles = StyleSheet.create({
   },
   inputPassword: {
     flex: 1,
-    width: 343,
+    // width: 343,
     height: 50,
     padding: 10,
     borderWidth: 1,
     borderColor: "black",
     marginBottom: 16,
     borderRadius: 10,
-    // marginHorizontal: 16,
   },
   passwordIcon: {
     position: "absolute",
@@ -174,7 +183,6 @@ const styles = StyleSheet.create({
     marginTop: 27, // костыль
     backgroundColor: "#FF6C00",
     borderRadius: 100,
-
   },
   buttonText: {
     fontFamily: 'Roboto',
@@ -185,7 +193,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
   },
-
 
   display: {
     flexDirection: 'row',

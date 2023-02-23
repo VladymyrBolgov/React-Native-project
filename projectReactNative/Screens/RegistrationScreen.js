@@ -40,56 +40,56 @@ export default function App() {
             style={styles.image}
             source={require("./staticImages/Photo.png")}>
         
-          <View style={styles.box}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-              >
-              <Text style={styles.h1}>Регистрация</Text>
-              <TextInput
-                  value={name}
-                  onChangeText={nameHandler}
-                  placeholder="Логин"
-                  style={styles.input}
-                />
+            <View style={styles.box}>
+                <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+                >
+                <Text style={styles.h1}>Регистрация</Text>
                 <TextInput
-                value={email}
-                  onChangeText={emailHandler}
-                  placeholder="Адрес электронной почты"
-                  keyboardType="email-address"
-                  style={styles.input}
-              />
-              
-             <View style={styles.inputContainer}>
-                <TextInput
-                  value={password}
-                  onChangeText={passwordHandler}
-                  placeholder="Пароль"
-                //secureTextEntry={true}
-                  secureTextEntry={!isPasswordVisible}
-                  style={styles.inputPassword}
+                    value={name}
+                    onChangeText={nameHandler}
+                    placeholder="Логин"
+                    style={styles.input}
+                    />
+                    <TextInput
+                    value={email}
+                    onChangeText={emailHandler}
+                    placeholder="Адрес электронной почты"
+                    keyboardType="email-address"
+                    style={styles.input}
                 />
-                <View style={styles.passwordIcon}>
-                  <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                      <MaterialCommunityIcons
-                        name={isPasswordVisible ? "eye-off" : "eye"}
-                        size={24}
-                        color="gray" />
-                    </TouchableWithoutFeedback>
+                
+                <View style={styles.inputContainer}>
+                    <TextInput
+                    value={password}
+                    onChangeText={passwordHandler}
+                    placeholder="Пароль"
+                    //secureTextEntry={true}
+                    secureTextEntry={!isPasswordVisible}
+                    style={styles.inputPassword}
+                    />
+                    <View style={styles.passwordIcon}>
+                    <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                        <MaterialCommunityIcons
+                            name={isPasswordVisible ? "eye-off" : "eye"}
+                            size={24}
+                            color="gray" />
+                        </TouchableWithoutFeedback>
+                    </View>
                 </View>
-              </View>
-              
-                <TouchableOpacity style={styles.button} onPress={onLogin}>
-                  <Text style={styles.buttonText}>Зарегистрироваться</Text>
-                </TouchableOpacity>
+                
+                    <TouchableOpacity style={styles.button} onPress={onLogin}>
+                    <Text style={styles.buttonText}>Зарегистрироваться</Text>
+                    </TouchableOpacity>
 
-                <View style={styles.display}>
-                  <Text style={styles.title}>Уже есть аккаунт?</Text>
-                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.link}>Войти</Text>
-                  </TouchableOpacity>
-                </View>
-            </KeyboardAvoidingView>
-          </View>
+                    <View style={styles.display}>
+                        <Text style={styles.title}>Уже есть аккаунт?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                            <Text style={styles.link}>Войти</Text>
+                        </TouchableOpacity>
+                    </View>
+                </KeyboardAvoidingView>
+            </View>
             
         </ImageBackground>
       </View>
