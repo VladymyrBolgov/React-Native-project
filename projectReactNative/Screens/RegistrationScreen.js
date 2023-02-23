@@ -11,10 +11,12 @@ import {
   Platform, 
   Alert,
   TouchableOpacity,
+
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function App() {
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,57 +41,67 @@ export default function App() {
         <ImageBackground
             style={styles.image}
             source={require("./staticImages/Photo.png")}>
-        
-            <View style={styles.box}>
-                <KeyboardAvoidingView
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-                >
-                <Text style={styles.h1}>Регистрация</Text>
-                <TextInput
-                    value={name}
-                    onChangeText={nameHandler}
-                    placeholder="Логин"
-                    style={styles.input}
-                    />
+      
+          <View style={styles.box}> 
+            {/* для поднятие над клавиатурой */}
+            <KeyboardAvoidingView 
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+              >
+              <Text style={styles.h1}>Регистрация</Text>
+               {/* для поднятие над клавиатурой */}
+              <View style={{...styles.form, marginBottom: isShowKeyboard ? 20 : 100}}>
                     <TextInput
-                    value={email}
-                    onChangeText={emailHandler}
-                    placeholder="Адрес электронной почты"
-                    keyboardType="email-address"
-                    style={styles.input}
-                />
-                
-                <View style={styles.inputContainer}>
-                    <TextInput
-                    value={password}
-                    onChangeText={passwordHandler}
-                    placeholder="Пароль"
-                    //secureTextEntry={true}
-                    secureTextEntry={!isPasswordVisible}
-                    style={styles.inputPassword}
+                        value={name}
+                        onChangeText={nameHandler}
+                        placeholder="Логин"
+                      // textAlign={"center"}
+                        style={styles.input}
+                        onFocus={() => setIsShowKeyboard(true)}
                     />
-                    <View style={styles.passwordIcon}>
-                    <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                        <MaterialCommunityIcons
-                            name={isPasswordVisible ? "eye-off" : "eye"}
-                            size={24}
-                            color="gray" />
-                        </TouchableWithoutFeedback>
-                    </View>
-                </View>
+                  
+                    <TextInput
+                        value={email}
+                        onChangeText={emailHandler}
+                        placeholder="Адрес электронной почты"
+                        keyboardType="email-address"
+                        style={styles.input}
+                        onFocus={() => setIsShowKeyboard(true)}
+                    />
+                    
+                  <View style={styles.inputContainer}>
+                      <TextInput
+                        value={password}
+                        onChangeText={passwordHandler}
+                        placeholder="Пароль"
+                      //secureTextEntry={true}
+                        secureTextEntry={!isPasswordVisible}
+                        style={styles.inputPassword}
+                        onFocus={() => setIsShowKeyboard(true)}
+                      />
+                        <View style={styles.passwordIcon}>
+                          <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                              <MaterialCommunityIcons
+                                name={isPasswordVisible ? "eye-off" : "eye"}
+                                size={24}
+                                color="gray" />
+                            </TouchableWithoutFeedback>
+                        </View>
+                  </View>
                 
-                    <TouchableOpacity style={styles.button} onPress={onLogin}>
-                    <Text style={styles.buttonText}>Зарегистрироваться</Text>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onLogin}>
+                      <Text style={styles.buttonText}>Зарегистрироваться</Text>
                     </TouchableOpacity>
-
-                    <View style={styles.display}>
-                        <Text style={styles.title}>Уже есть аккаунт?</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.link}>Войти</Text>
-                        </TouchableOpacity>
-                    </View>
-                </KeyboardAvoidingView>
-            </View>
+              </View>
+              
+                <View style={styles.display}>
+                  <Text style={styles.title}>Уже есть аккаунт?</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.link}>Войти</Text>
+                  </TouchableOpacity>
+                </View>
+              
+            </KeyboardAvoidingView>
+          </View>
             
         </ImageBackground>
       </View>
@@ -107,6 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
+
   },
 
   box: {
@@ -133,8 +146,13 @@ const styles = StyleSheet.create({
     color: '#212121',
   },
 
+  form: {
+    marginHorizontal: 16,
+    
+  }, 
+
   input: {
-    width: 343,
+    width: 343,  // без box надо закоментить
     height: 50,
     padding: 10,
     borderWidth: 1,
@@ -143,13 +161,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
+
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   inputPassword: {
     flex: 1,
-    width: 343,
+    // width: 343,
     height: 50,
     padding: 10,
     borderWidth: 1,
@@ -163,13 +182,13 @@ const styles = StyleSheet.create({
     top: 15,
   },
 
+
   button: {
     alignItems: "center",
     padding: 16,
     marginTop: 27, // костыль
     backgroundColor: "#FF6C00",
     borderRadius: 100,
-
   },
   buttonText: {
     fontFamily: 'Roboto',
@@ -198,3 +217,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+

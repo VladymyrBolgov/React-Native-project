@@ -16,6 +16,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function App() {
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,20 +41,22 @@ export default function App() {
         <ImageBackground
             style={styles.image}
             source={require("./staticImages/Photo.png")}>
-        
+      
           <View style={styles.box}> 
             {/* для поднятие над клавиатурой */}
             <KeyboardAvoidingView 
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Регистрация</Text>
-              <View style={styles.form}>
+               {/* для поднятие над клавиатурой */}
+              <View style={{...styles.form, marginBottom: isShowKeyboard ? 20 : 78}}>
                     <TextInput
                         value={name}
                         onChangeText={nameHandler}
                         placeholder="Логин"
                       // textAlign={"center"}
-                        style={styles.input}
+                  style={styles.input}
+                  onFocus={() => setIsShowKeyboard(true)}
                     />
                   
                       <TextInput
@@ -61,7 +64,8 @@ export default function App() {
                         onChangeText={emailHandler}
                         placeholder="Адрес электронной почты"
                         keyboardType="email-address"
-                        style={styles.input}
+                  style={styles.input}
+                  onFocus={() => setIsShowKeyboard(true)}
                     />
                     
                   <View style={styles.inputContainer}>
@@ -71,7 +75,8 @@ export default function App() {
                         placeholder="Пароль"
                       //secureTextEntry={true}
                         secureTextEntry={!isPasswordVisible}
-                        style={styles.inputPassword}
+                    style={styles.inputPassword}
+                    onFocus={() => setIsShowKeyboard(true)}
                       />
                       <View style={styles.passwordIcon}>
                         <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
@@ -211,6 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 
 
 

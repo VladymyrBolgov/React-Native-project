@@ -15,6 +15,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function App() {
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,32 +44,35 @@ export default function App() {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Войти</Text>
+              <View style={{...styles.form, marginBottom: isShowKeyboard ? 10 : 144}}>
                 <TextInput
-                value={email}
+                  value={email}
                   onChangeText={emailHandler}
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address"
                   style={styles.input}
-              />
-              
-             <View style={styles.inputContainer}>
-                <TextInput
-                  value={password}
-                  onChangeText={passwordHandler}
-                  placeholder="Пароль"
-                //secureTextEntry={true}
-                  secureTextEntry={!isPasswordVisible}
-                  style={styles.inputPassword}
+                  onFocus={() => setIsShowKeyboard(true)}
                 />
-                <View style={styles.passwordIcon}>
-                  <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                      <MaterialCommunityIcons
-                        name={isPasswordVisible ? "eye-off" : "eye"}
-                        size={24}
-                        color="gray" />
-                    </TouchableWithoutFeedback>
+              
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    value={password}
+                    onChangeText={passwordHandler}
+                    placeholder="Пароль"
+                  //secureTextEntry={true}
+                    secureTextEntry={!isPasswordVisible}
+                    style={styles.inputPassword}
+                    onFocus={() => setIsShowKeyboard(true)}
+                  />
+                  <View style={styles.passwordIcon}>
+                    <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                        <MaterialCommunityIcons
+                          name={isPasswordVisible ? "eye-off" : "eye"}
+                          size={24}
+                          color="gray" />
+                      </TouchableWithoutFeedback>
+                  </View>
                 </View>
-              </View>
               
                 <TouchableOpacity style={styles.button} onPress={onLogin}>
                   <Text style={styles.buttonText}>Войти</Text>
@@ -80,6 +84,8 @@ export default function App() {
                     <Text style={styles.link}>Зарегистрироваться</Text>
                   </TouchableOpacity>
                 </View>
+              </View>
+
             </KeyboardAvoidingView>
           </View>
             
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   h1: {
-    marginTop: 32, //костыль
+    marginTop: 32, 
     marginBottom: 33,
     fontFamily: 'Roboto',
     fontStyle: 'normal',
