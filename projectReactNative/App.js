@@ -10,8 +10,9 @@ import {
   KeyboardAvoidingView, 
   Platform, 
   TouchableOpacity,
-
 } from "react-native";
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const initialState = {
@@ -19,6 +20,13 @@ const initialState = {
   email: "",
   password: "",
 }
+
+// const loadApplication = async () => {
+//   await Font.loadAsync({
+//    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+// "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+//   });
+// };
 
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -33,7 +41,8 @@ export default function App() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);``
+    console.log(state);
+    setState(initialState);
   }
 
   return (
@@ -53,19 +62,21 @@ export default function App() {
               <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 78}}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Логин"    
+                  placeholder="Логин" 
+                  onFocus={() => setIsShowKeyboard(true)} 
+                  value={state.name}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, name: value }))}
-                  onFocus={() => setIsShowKeyboard(true)} 
                    />
                   
                 <TextInput
                   style={styles.input}
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address" 
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))}       
-                  onFocus={() => setIsShowKeyboard(true)}
                 />
                     
                   <View style={styles.inputContainer}>
@@ -73,9 +84,10 @@ export default function App() {
                     style={styles.inputPassword}
                     placeholder="Пароль"
                     secureTextEntry={!isPasswordVisible}
+                    onFocus={() => setIsShowKeyboard(true)}
+                    value={state.password}
                     onChangeText={(value) =>
                       setState((prevState) => ({ ...prevState, password: value }))}   
-                    onFocus={() => setIsShowKeyboard(true)}
                     />
                       <View style={styles.passwordIcon}>
                         <TouchableWithoutFeedback onPress={togglePasswordVisibility}>

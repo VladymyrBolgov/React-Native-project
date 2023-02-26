@@ -33,7 +33,8 @@ export default function App() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);``
+    console.log(state);
+    setState(initialState);
   }
 
   return (
@@ -49,13 +50,15 @@ export default function App() {
               >
               <Text style={styles.h1}>Войти</Text>
               <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 144}}>
+              
               <TextInput
                   style={styles.input}
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address" 
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))}       
-                  onFocus={() => setIsShowKeyboard(true)}
                 />
               
                 <View style={styles.inputContainer}>
@@ -63,9 +66,10 @@ export default function App() {
                     style={styles.inputPassword}
                     placeholder="Пароль"
                     secureTextEntry={!isPasswordVisible}
+                    onFocus={() => setIsShowKeyboard(true)}
+                    value={state.password}
                     onChangeText={(value) =>
                       setState((prevState) => ({ ...prevState, password: value }))}   
-                    onFocus={() => setIsShowKeyboard(true)}
                     />
                   <View style={styles.passwordIcon}>
                     <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
