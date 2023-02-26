@@ -44,7 +44,7 @@ export default function App() {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Войти</Text>
-              <View style={{...styles.form, marginBottom: isShowKeyboard ? 10 : 144}}>
+              <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 144}}>
                 <TextInput
                   value={email}
                   onChangeText={emailHandler}
