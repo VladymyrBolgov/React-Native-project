@@ -11,8 +11,10 @@ import {
   Platform, 
   TouchableOpacity,
 } from "react-native";
+
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const initialState = {
@@ -21,17 +23,17 @@ const initialState = {
   password: "",
 }
 
-// const loadApplication = async () => {
-//   await Font.loadAsync({
-//    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-// "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
-//   });
-// };
+const loadFonts = async () => {
+  await Font.loadAsync({
+   "Roboto-Regular": require("./fonts/Roboto-Regular.ttf"),
+  "Roboto-Bold": require("./fonts/Roboto-Bold.ttf"),
+  });
+};
 
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
   const [state, setState] = useState(initialState);
+  const [isReady, setIsReady] = useState(false);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -43,7 +45,17 @@ export default function App() {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
-  }
+  };
+
+  // if (!isReady) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadFonts}
+  //       onFinish={() => setIsReady(true)}
+  //       onError={console.warn}
+  //     />
+  //   );
+  // };
 
   return (
      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
