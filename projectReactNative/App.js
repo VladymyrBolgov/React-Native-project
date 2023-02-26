@@ -47,15 +47,15 @@ export default function App() {
     setState(initialState);
   };
 
-  // if (!isReady) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={loadFonts}
-  //       onFinish={() => setIsReady(true)}
-  //       onError={console.warn}
-  //     />
-  //   );
-  // };
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
+  };
 
   return (
      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
