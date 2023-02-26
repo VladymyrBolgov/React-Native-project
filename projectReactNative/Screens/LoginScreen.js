@@ -9,28 +9,32 @@ import {
   Keyboard, // импорт компонента клавиатуры
   KeyboardAvoidingView, 
   Platform, 
-  Alert,
   TouchableOpacity,
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+const initialState = {
+  email: "",
+  password: "",
+}
+
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [state, setState] = useState(initialState);
 
-  const emailHandler = (text) => setEmail(text);
-  const passwordHandler = (text) => setPassword(text);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const onLogin = () => {
-    Alert.alert("Credentials", `${email} + ${password}`);
-  };
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log(state);``
+  }
 
   return (
      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -45,25 +49,24 @@ export default function App() {
               >
               <Text style={styles.h1}>Войти</Text>
               <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 144}}>
-                <TextInput
-                  value={email}
-                  onChangeText={emailHandler}
-                  placeholder="Адрес электронной почты"
-                  keyboardType="email-address"
+              <TextInput
                   style={styles.input}
+                  placeholder="Адрес электронной почты"
+                  keyboardType="email-address" 
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))}       
                   onFocus={() => setIsShowKeyboard(true)}
                 />
               
                 <View style={styles.inputContainer}>
-                  <TextInput
-                    value={password}
-                    onChangeText={passwordHandler}
-                    placeholder="Пароль"
-                  //secureTextEntry={true}
-                    secureTextEntry={!isPasswordVisible}
+                <TextInput
                     style={styles.inputPassword}
+                    placeholder="Пароль"
+                    secureTextEntry={!isPasswordVisible}
+                    onChangeText={(value) =>
+                      setState((prevState) => ({ ...prevState, password: value }))}   
                     onFocus={() => setIsShowKeyboard(true)}
-                  />
+                    />
                   <View style={styles.passwordIcon}>
                     <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
                         <MaterialCommunityIcons
@@ -74,7 +77,10 @@ export default function App() {
                   </View>
                 </View>
               
-                <TouchableOpacity style={styles.button} onPress={onLogin}>
+                <TouchableOpacity
+                   activeOpacity={0.8}
+                  style={styles.button} 
+                  onPress={keyboardHide}>
                   <Text style={styles.buttonText}>Войти</Text>
                 </TouchableOpacity>
 
