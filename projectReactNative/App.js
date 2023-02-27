@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView, 
   Platform, 
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -31,6 +32,21 @@ export default function App() {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+
+  // для поворота єкрана
+  const [dimensions, setDimensions] = useState(
+    Dimensions.get('window').width - 20 * 2)
+
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get('window').width - 20 * 2;
+      setDimensions(width);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    }
+  }, []);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -71,53 +87,57 @@ export default function App() {
               >
               <Text style={styles.h1}>Регистрация</Text>
                {/* для поднятие над клавиатурой */}
-              <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 78}}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Логин" 
-                  onFocus={() => setIsShowKeyboard(true)} 
-                  value={state.name}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({ ...prevState, name: value }))}
-                   />
-                  
-                <TextInput
-                  style={styles.input}
-                  placeholder="Адрес электронной почты"
-                  keyboardType="email-address" 
-                  onFocus={() => setIsShowKeyboard(true)}
-                  value={state.email}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({ ...prevState, email: value }))}       
-                />
-                    
-                  <View style={styles.inputContainer}>
-                  <TextInput
-                    style={styles.inputPassword}
-                    placeholder="Пароль"
-                    secureTextEntry={!isPasswordVisible}
-                    onFocus={() => setIsShowKeyboard(true)}
-                    value={state.password}
-                    onChangeText={(value) =>
-                      setState((prevState) => ({ ...prevState, password: value }))}   
+              <View style={{
+                    ...styles.form,
+                    marginBottom: isShowKeyboard ? 0 : 78,
+                    width: dimensions,
+                  }}>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Логин" 
+                      onFocus={() => setIsShowKeyboard(true)} 
+                      value={state.name}
+                      onChangeText={(value) =>
+                        setState((prevState) => ({ ...prevState, name: value }))}
+                      />
+                      
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Адрес электронной почты"
+                      keyboardType="email-address" 
+                      onFocus={() => setIsShowKeyboard(true)}
+                      value={state.email}
+                      onChangeText={(value) =>
+                        setState((prevState) => ({ ...prevState, email: value }))}       
                     />
-                      <View style={styles.passwordIcon}>
-                        <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
-                            <MaterialCommunityIcons
-                              name={isPasswordVisible ? "eye-off" : "eye"}
-                              size={24}
-                              color="gray" />
-                          </TouchableWithoutFeedback>
+                        
+                      <View style={styles.inputContainer}>
+                        <TextInput
+                          style={styles.inputPassword}
+                          placeholder="Пароль"
+                          secureTextEntry={!isPasswordVisible}
+                          onFocus={() => setIsShowKeyboard(true)}
+                          value={state.password}
+                          onChangeText={(value) =>
+                            setState((prevState) => ({ ...prevState, password: value }))}   
+                          />
+                            <View style={styles.passwordIcon}>
+                              <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                                  <MaterialCommunityIcons
+                                    name={isPasswordVisible ? "eye-off" : "eye"}
+                                    size={24}
+                                    color="gray" />
+                                </TouchableWithoutFeedback>
+                            </View>
                       </View>
-                  </View>
-                
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.button} 
-                  onPress={keyboardHide}>
-                    <Text style={styles.buttonText}>Зарегистрироваться</Text>
-                </TouchableOpacity>
-              </View>
+                    
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      style={styles.button} 
+                      onPress={keyboardHide}>
+                        <Text style={styles.buttonText}>Зарегистрироваться</Text>
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.display}>
                   <Text style={styles.title}>Уже есть аккаунт?</Text>
                   <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -143,7 +163,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    alignItems: "center"
 
   },
 
@@ -170,12 +191,11 @@ const styles = StyleSheet.create({
   },
 
   form: {
-    marginHorizontal: 16,
+    // marginHorizontal: 16,
     
   }, 
 
   input: {
-    width: 343,  // без box надо закоментить
     height: 50,
     padding: 10,
     borderWidth: 1,
@@ -191,7 +211,6 @@ const styles = StyleSheet.create({
   },
   inputPassword: {
     flex: 1,
-    // width: 343,
     height: 50,
     padding: 10,
     borderWidth: 1,
