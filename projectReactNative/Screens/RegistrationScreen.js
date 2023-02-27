@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -10,9 +10,12 @@ import {
   KeyboardAvoidingView, 
   Platform, 
   TouchableOpacity,
-
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+SplashScreen.preventAutoHideAsync();
 
 const initialState = {
   name: "",
@@ -22,11 +25,9 @@ const initialState = {
 
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
   const [state, setState] = useState(initialState);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -34,11 +35,30 @@ export default function App() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);``
+    console.log(state);
+    setState(initialState);
+  };
+
+  const [fontsLoaded] = useFonts({
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf')
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
   }
 
   return (
-     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      onLayout={onLayoutRootView}
+    >
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
@@ -54,19 +74,21 @@ export default function App() {
               <View style={{...styles.form, marginBottom: isShowKeyboard ? 0 : 78}}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Логин"    
+                  placeholder="Логин" 
+                  onFocus={() => setIsShowKeyboard(true)} 
+                  value={state.name}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, name: value }))}
-                  onFocus={() => setIsShowKeyboard(true)} 
                    />
                   
                 <TextInput
                   style={styles.input}
                   placeholder="Адрес электронной почты"
                   keyboardType="email-address" 
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))}       
-                  onFocus={() => setIsShowKeyboard(true)}
                 />
                     
                   <View style={styles.inputContainer}>
@@ -74,9 +96,10 @@ export default function App() {
                     style={styles.inputPassword}
                     placeholder="Пароль"
                     secureTextEntry={!isPasswordVisible}
+                    onFocus={() => setIsShowKeyboard(true)}
+                    value={state.password}
                     onChangeText={(value) =>
                       setState((prevState) => ({ ...prevState, password: value }))}   
-                    onFocus={() => setIsShowKeyboard(true)}
                     />
                       <View style={styles.passwordIcon}>
                         <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
@@ -95,7 +118,6 @@ export default function App() {
                     <Text style={styles.buttonText}>Зарегистрироваться</Text>
                 </TouchableOpacity>
               </View>
-              
                 <View style={styles.display}>
                   <Text style={styles.title}>Уже есть аккаунт?</Text>
                   <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -122,7 +144,6 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-
   },
 
   box: {
@@ -139,9 +160,7 @@ const styles = StyleSheet.create({
   h1: {
     marginTop: 80, //костыль
     marginBottom: 33,
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '500',
+    fontFamily: 'Roboto-Medium',
     fontSize: 30,
     lineHeight: 35,
     textAlign: 'center',
@@ -194,9 +213,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   buttonText: {
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     lineHeight: 19,
     textAlign: 'center',
@@ -212,11 +229,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     marginRight: 5,
   },
 
   link: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
   },
 });

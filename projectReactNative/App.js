@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -11,11 +11,11 @@ import {
   Platform, 
   TouchableOpacity,
 } from "react-native";
-
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
-
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+SplashScreen.preventAutoHideAsync();
 
 const initialState = {
   name: "",
@@ -23,17 +23,9 @@ const initialState = {
   password: "",
 }
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-   "Roboto-Regular": require("./fonts/Roboto-Regular.ttf"),
-  "Roboto-Bold": require("./fonts/Roboto-Bold.ttf"),
-  });
-};
-
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -47,18 +39,26 @@ export default function App() {
     setState(initialState);
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
-  };
+  const [fontsLoaded] = useFonts({
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf')
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      onLayout={onLayoutRootView}
+    >
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
@@ -161,9 +161,7 @@ const styles = StyleSheet.create({
   h1: {
     marginTop: 80, //костыль
     marginBottom: 33,
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '500',
+    fontFamily: 'Roboto-Medium',
     fontSize: 30,
     lineHeight: 35,
     textAlign: 'center',
@@ -216,9 +214,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   buttonText: {
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     lineHeight: 19,
     textAlign: 'center',
@@ -234,11 +230,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     marginRight: 5,
   },
 
   link: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
   },
 });

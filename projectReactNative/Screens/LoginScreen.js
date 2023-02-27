@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback} from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -13,6 +13,10 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+SplashScreen.preventAutoHideAsync();
+
 const initialState = {
   email: "",
   password: "",
@@ -20,15 +24,12 @@ const initialState = {
 
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
   const [state, setState] = useState(initialState);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -37,8 +38,26 @@ export default function App() {
     setState(initialState);
   }
 
+  const [fontsLoaded] = useFonts({
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf')
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      onLayout={onLayoutRootView}
+    >
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
@@ -131,9 +150,7 @@ const styles = StyleSheet.create({
   h1: {
     marginTop: 32, 
     marginBottom: 33,
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '500',
+    fontFamily: 'Roboto-Medium',
     fontSize: 30,
     lineHeight: 35,
     textAlign: 'center',
@@ -180,9 +197,7 @@ const styles = StyleSheet.create({
 
   },
   buttonText: {
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     lineHeight: 19,
     textAlign: 'center',
@@ -198,11 +213,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
     marginRight: 5,
   },
 
   link: {
+    fontFamily:'Roboto-Regular',
     fontSize: 16,
   },
 });
