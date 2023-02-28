@@ -1,3 +1,15 @@
+// import { View } from 'react-native';
+// import  RegistrationScreen  from './Screens/RegistrationScreen';
+
+// export default function App() {
+
+//   return (
+//     <View style={{flex: 1}}  onLayout={onLayoutRootView}>
+//       <RegistrationScreen />
+//     </View>
+//   );
+// }
+
 import React, { useState, useCallback, useEffect } from "react";
 import {
   StyleSheet,
@@ -78,8 +90,7 @@ export default function App() {
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
-            source={require("./staticImages/Photo.png")}>
-      
+            source={require("./assets/images/PhotoBG.png")}>
           <View style={styles.box}> 
             {/* для поднятие над клавиатурой */}
             <KeyboardAvoidingView 
@@ -100,7 +111,6 @@ export default function App() {
                       onChangeText={(value) =>
                         setState((prevState) => ({ ...prevState, name: value }))}
                       />
-                      
                     <TextInput
                       style={styles.input}
                       placeholder="Адрес электронной почты"
@@ -110,7 +120,6 @@ export default function App() {
                       onChangeText={(value) =>
                         setState((prevState) => ({ ...prevState, email: value }))}       
                     />
-                        
                       <View style={styles.inputContainer}>
                         <TextInput
                           style={styles.inputPassword}
@@ -157,15 +166,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
-    
+    backgroundColor: "#ecf0f1", 
   },
-  image: {
+ image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
     alignItems: "center"
-
   },
 
   box: {
@@ -192,7 +199,6 @@ const styles = StyleSheet.create({
 
   form: {
     // marginHorizontal: 16,
-    
   }, 
 
   input: {
@@ -203,7 +209,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 10,
   },
-
 
   inputContainer: {
     flexDirection: 'row',
@@ -223,7 +228,6 @@ const styles = StyleSheet.create({
     right: 15,
     top: 15,
   },
-
 
   button: {
     alignItems: "center",
@@ -259,6 +263,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
