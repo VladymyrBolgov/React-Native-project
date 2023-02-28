@@ -40,6 +40,10 @@ export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
+  const [isFocusedLogin, setIsFocusedLogin] = useState(false)
+    const [isFocusedEmail, setIsFocusedEmail] = useState(false)
+    const [isFocusedPassword, setIsFocusedPassword] = useState(false)
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -101,31 +105,42 @@ export default function App() {
               <View style={{
                     ...styles.form,
                     marginBottom: isShowKeyboard ? 0 : 78,
-                    width: dimensions,
-                  }}>
+                width: dimensions}}> 
                     <TextInput
-                      style={styles.input}
+                      style={{...styles.input, borderColor: isFocusedLogin ? '#FF6C00' : '#E8E8E8'}}
                       placeholder="Логин" 
-                      onFocus={() => setIsShowKeyboard(true)} 
+                      onFocus={() => {
+                        setIsShowKeyboard(true)
+                        setIsFocusedLogin(true)
+                      }}
+                      onBlur={() => setIsFocusedLogin(false)}                  
                       value={state.name}
                       onChangeText={(value) =>
                         setState((prevState) => ({ ...prevState, name: value }))}
                       />
                     <TextInput
-                      style={styles.input}
+                      style={{...styles.input, borderColor: isFocusedEmail ? '#FF6C00' : '#E8E8E8'}}
                       placeholder="Адрес электронной почты"
                       keyboardType="email-address" 
-                      onFocus={() => setIsShowKeyboard(true)}
+                      onFocus={() => {
+                        setIsShowKeyboard(true)
+                        setIsFocusedEmail(true)
+                        }}
+                      onBlur={() => setIsFocusedEmail(false)}
                       value={state.email}
                       onChangeText={(value) =>
                         setState((prevState) => ({ ...prevState, email: value }))}       
                     />
                       <View style={styles.inputContainer}>
                         <TextInput
-                          style={styles.inputPassword}
+                          style={{...styles.inputPassword, borderColor: isFocusedPassword ? '#FF6C00' : '#E8E8E8'}}
                           placeholder="Пароль"
                           secureTextEntry={!isPasswordVisible}
-                          onFocus={() => setIsShowKeyboard(true)}
+                          onFocus={() => {
+                            setIsShowKeyboard(true)
+                            setIsFocusedPassword(true)
+                            }}
+                          onBlur={() => setIsFocusedPassword(false)}
                           value={state.password}
                           onChangeText={(value) =>
                             setState((prevState) => ({ ...prevState, password: value }))}   
@@ -208,6 +223,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     marginBottom: 16,
     borderRadius: 10,
+    borderColor: "#FF6C00",
   },
 
   inputContainer: {
