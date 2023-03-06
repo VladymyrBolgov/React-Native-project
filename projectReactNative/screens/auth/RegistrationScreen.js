@@ -153,10 +153,13 @@ export default function RegistrationScreen({navigation}) {
                 </View>
                   <View style={styles.display}>
                     <Text style={styles.title}>Уже есть аккаунт?</Text>
-                    <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
-                      Войти
-                    </Text>
-                  </View>             
+                    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                        <Text style={styles.link} >
+                          Войти
+                        </Text>
+                    </TouchableOpacity>
+                  </View>  
+              
             </KeyboardAvoidingView>
           </View>   
         </ImageBackground>
