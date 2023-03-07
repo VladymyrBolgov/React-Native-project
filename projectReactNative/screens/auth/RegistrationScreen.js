@@ -158,7 +158,17 @@ export default function RegistrationScreen({navigation}) {
                           Войти
                         </Text>
                     </TouchableOpacity>
-                  </View>  
+                  </View> 
+              
+              <View style={styles.PhotoContainer}>
+                <View style={styles.Photo}>
+
+                </View>
+                <View style={styles.Icon}>
+
+                </View>
+
+              </View>
               
             </KeyboardAvoidingView>
           </View>   
@@ -275,6 +285,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#1B4371',
   },
+
+  PhotoContainer: {
+    position: "absolute",
+    width: 132,
+    height: 120,
+  },
+  Photo: {
+ 
+    background: '#F6F6F6',
+    borderRadius: 16,
+    width: 120,
+    height: 120,
+  },
+  
+  PhotoContainer: {
+    
+  }
 });
 
 
