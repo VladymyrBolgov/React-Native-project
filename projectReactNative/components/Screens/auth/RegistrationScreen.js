@@ -11,7 +11,6 @@ import {
   Platform, 
   TouchableOpacity,
   Dimensions,
-  Button,
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 

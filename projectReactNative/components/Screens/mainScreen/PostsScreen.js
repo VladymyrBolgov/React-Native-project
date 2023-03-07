@@ -1,16 +1,23 @@
-// import {
-//   StyleSheet,
-// } from "react-native";
+import React from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+} from "react-native";
 
-// export default function PostsScreen({ navigation }) {
+export default function PostsScreen({ navigation }) {
   
-//     return (
-//   <></>
-//   );
-// }
-// const styles = StyleSheet.create({
-//   container: {
-  
-//   },
+    return (
+      <View style={styles.container}>
+        <Text>PostsScreen</Text>
+      </View>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+  },
 
-//   })
+  })
