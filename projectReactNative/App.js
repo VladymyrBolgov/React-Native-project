@@ -1,5 +1,5 @@
-import RegistrationScreen from "./screens/auth/RegistrationScreen";
-import LoginScreen from "./screens/auth/LoginScreen";
+import RegistrationScreen from "./components/Screens/auth/RegistrationScreen";
+import LoginScreen from "./components/Screens/auth/LoginScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 

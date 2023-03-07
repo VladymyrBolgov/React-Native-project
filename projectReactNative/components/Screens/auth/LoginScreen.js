@@ -61,8 +61,8 @@ export default function LoginScreen({ navigation }) {
 
    // fonts
    const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-    'Roboto-Medium': require('../../assets/fonts/Roboto-Medium.ttf')
+    'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('../../../assets/fonts/Roboto-Medium.ttf')
   })
 
   const onLayoutRootView = useCallback(async () => {
@@ -82,7 +82,7 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.container}>
         <ImageBackground
             style={styles.image}
-            source={require("../../assets/images/PhotoBG.png")}>
+            source={require("../../../assets/images/PhotoBG.png")}>
         
           <View style={styles.box}>
             <KeyboardAvoidingView
