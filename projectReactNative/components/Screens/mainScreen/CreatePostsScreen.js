@@ -2,7 +2,7 @@
 //   StyleSheet,
 // } from "react-native";
 
-// export default function MapScreen({ navigation }) {
+// export default function CreatePostsScreen({ navigation }) {
   
 //     return (
 //   <></>

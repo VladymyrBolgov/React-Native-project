@@ -1,9 +1,12 @@
 import RegistrationScreen from "./components/Screens/auth/RegistrationScreen";
 import LoginScreen from "./components/Screens/auth/LoginScreen";
-import { createStackNavigator } from "@react-navigation/stack";
+
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 export default function App() {
 
