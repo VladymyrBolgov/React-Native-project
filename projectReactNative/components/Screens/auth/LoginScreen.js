@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback   } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -11,7 +11,6 @@ import {
   Platform, 
   TouchableOpacity,
   Dimensions,
-  Button,
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 //fonts
@@ -26,11 +25,33 @@ const initialState = {
 
 export default function LoginScreen({ navigation }) {
   console.log("navigation", navigation);
-  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
   const [isFocusedEmail, setIsFocusedEmail] = useState(false)
   const [isFocusedPassword, setIsFocusedPassword] = useState(false)
+ 
+  const emailRef = useRef()
+  const passRef = useRef()
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log(state);
+    setState(initialState);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log("login =>", login)
+    if (email.length === 0 || password.length === 0) {
+        alert('Check your login info')
+        return 
+    }
+    setEmail('')
+    setPassword('')
+    keyboardHide()
+}
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -52,25 +73,16 @@ export default function LoginScreen({ navigation }) {
     }
   }, []);
 
-  const keyboardHide = () => {
-    setIsShowKeyboard(false);
-    Keyboard.dismiss();
-    console.log(state);
-    setState(initialState);
-  }
-
    // fonts
    const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Medium': require('../../../assets/fonts/Roboto-Medium.ttf')
   })
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
@@ -106,6 +118,8 @@ export default function LoginScreen({ navigation }) {
                       value={state.email}
                       onChangeText={(value) =>
                         setState((prevState) => ({ ...prevState, email: value }))}       
+                      onSubmitEditing={() => passRef.current.focus()} 
+                      ref={emailRef}
                     />
               
                 <View style={styles.inputContainer}>
@@ -121,6 +135,8 @@ export default function LoginScreen({ navigation }) {
                           value={state.password}
                           onChangeText={(value) =>
                             setState((prevState) => ({ ...prevState, password: value }))}   
+                          onSubmitEditing={onSubmit} 
+                          ref={passRef}
                           />
                   <View style={styles.passwordIcon}>
                     <TouchableWithoutFeedback onPress={togglePasswordVisibility}>

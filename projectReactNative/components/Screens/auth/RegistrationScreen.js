@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -25,19 +25,43 @@ const initialState = {
   password: "",
 }
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
-
   const [isFocusedLogin, setIsFocusedLogin] = useState(false)
-    const [isFocusedEmail, setIsFocusedEmail] = useState(false)
-    const [isFocusedPassword, setIsFocusedPassword] = useState(false)
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false)
+  const [isFocusedPassword, setIsFocusedPassword] = useState(false)
+
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+
+  const loginRef = useRef()
+  const emailRef = useRef()
+  const passRef = useRef()
+
+ const keyboardHide = () => {
+   setIsShowKeyboard(false);
+   console.log(state);
+    Keyboard.dismiss();
+    setState(initialState);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log("login =>", login);
+    if (login.length === 0 || email.length === 0 || password.length === 0) {
+        alert('Check your registration info')
+        return 
+    }
+    setLogin('')
+    setEmail('')
+    setPassword('')
+    keyboardHide()
+}
 
   // для поворота єкрана
   const [dimensions, setDimensions] = useState(
@@ -54,24 +78,16 @@ export default function RegistrationScreen({navigation}) {
     }
   }, []);
 
-  const keyboardHide = () => {
-    setIsShowKeyboard(false);
-    Keyboard.dismiss();
-    console.log(state);
-    setState(initialState);
-  };
   // fonts
   const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Medium': require('../../../assets/fonts/Roboto-Medium.ttf')
   })
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
@@ -101,10 +117,13 @@ export default function RegistrationScreen({navigation}) {
                         setIsShowKeyboard(true)
                         setIsFocusedLogin(true)
                       }}
-                      onBlur={() => setIsFocusedLogin(false)}                  
+                      onBlur={() => setIsFocusedLogin(false)}   
+                  
                       value={state.name}
                       onChangeText={(value) =>
-                        setState((prevState) => ({ ...prevState, name: value }))}
+                      setState((prevState) => ({ ...prevState, name: value }))}
+                      onSubmitEditing={() => emailRef.current.focus()} 
+                      ref = {loginRef}
                       />
                     <TextInput
                       style={{...styles.input, borderColor: isFocusedEmail ? '#FF6C00' : '#E8E8E8'}}
@@ -117,7 +136,9 @@ export default function RegistrationScreen({navigation}) {
                       onBlur={() => setIsFocusedEmail(false)}
                       value={state.email}
                       onChangeText={(value) =>
-                        setState((prevState) => ({ ...prevState, email: value }))}       
+                      setState((prevState) => ({ ...prevState, email: value }))} 
+                      onSubmitEditing={() => passRef.current.focus()} 
+                      ref={emailRef}
                     />
                       <View style={styles.inputContainer}>
                         <TextInput
@@ -131,7 +152,9 @@ export default function RegistrationScreen({navigation}) {
                           onBlur={() => setIsFocusedPassword(false)}
                           value={state.password}
                           onChangeText={(value) =>
-                            setState((prevState) => ({ ...prevState, password: value }))}   
+                          setState((prevState) => ({ ...prevState, password: value }))}
+                          onSubmitEditing={onSubmit} 
+                          ref={passRef}
                           />
                             <View style={styles.passwordIcon}>
                               <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
