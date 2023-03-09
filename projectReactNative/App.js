@@ -1,9 +1,10 @@
-import RegistrationScreen from "./components/Screens/auth/RegistrationScreen";
-import LoginScreen from "./components/Screens/auth/LoginScreen";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import RegistrationScreen from "./components/Screens/auth/RegistrationScreen";
+import LoginScreen from "./components/Screens/auth/LoginScreen";
+import PostsScreen from "./components/Screens/mainScreen/PostsScreen"
 
 const Stack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -13,7 +14,16 @@ export default function App() {
   return (
     <>
     <NavigationContainer>
-        <Stack.Navigator>
+        <MainTab.Navigator>
+          <MainTab.Screen name='Posts' component={PostsScreen} />
+        </MainTab.Navigator>
+    </NavigationContainer>
+  </>
+  );
+}
+// auth
+
+{/* <Stack.Navigator>
           <Stack.Screen
            options={{
             headerShown: false,
@@ -26,8 +36,4 @@ export default function App() {
           }}
             name="Login"
             component={LoginScreen} />  
-      </Stack.Navigator>
-    </NavigationContainer>
-  </>
-  );
-}
+      </Stack.Navigator> */}
