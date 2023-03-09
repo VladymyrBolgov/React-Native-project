@@ -172,10 +172,11 @@ export default function RegistrationScreen({ navigation }) {
                       onPress={keyboardHide}>
                         <Text style={styles.buttonText}>Зарегистрироваться</Text>
                     </TouchableOpacity>
+                
                 </View>
                   <View style={styles.display}>
                     <Text style={styles.title}>Уже есть аккаунт?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                   
                         <Text style={styles.link} >
                           Войти

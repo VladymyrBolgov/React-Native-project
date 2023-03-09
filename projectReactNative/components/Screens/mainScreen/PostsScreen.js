@@ -6,7 +6,7 @@ import {
 } from "react-native";
 
 export default function PostsScreen({ navigation }) {
-  
+  console.log("navigation", navigation);
     return (
       <View style={styles.container}>
         <Text>PostsScreen</Text>

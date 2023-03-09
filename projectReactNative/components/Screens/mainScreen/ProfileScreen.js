@@ -6,7 +6,7 @@ import {
 } from "react-native";
 
 export default function ProfileScreen({ navigation }) {
-  
+  console.log("navigation", navigation);
     return (
       <View style={styles.container}>
         <Text>ProfileScreen</Text>
