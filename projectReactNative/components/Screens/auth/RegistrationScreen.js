@@ -42,7 +42,8 @@ export default function RegistrationScreen({ navigation }) {
    setIsShowKeyboard(false);
    console.log(state);
     Keyboard.dismiss();
-    setState(initialState);
+   setState(initialState);
+   navigation.navigate('Home');
   };
 
   // для поворота єкрана

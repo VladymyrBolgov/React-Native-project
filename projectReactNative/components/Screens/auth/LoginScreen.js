@@ -36,6 +36,7 @@ export default function LoginScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
+    navigation.navigate('Home');
   }
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
