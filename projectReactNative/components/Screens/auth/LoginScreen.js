@@ -30,9 +30,6 @@ export default function LoginScreen({ navigation }) {
 
   const [isFocusedEmail, setIsFocusedEmail] = useState(false)
   const [isFocusedPassword, setIsFocusedPassword] = useState(false)
- 
-  const emailRef = useRef()
-  const passRef = useRef()
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -40,18 +37,6 @@ export default function LoginScreen({ navigation }) {
     console.log(state);
     setState(initialState);
   }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-    console.log("login =>", login)
-    if (email.length === 0 || password.length === 0) {
-        alert('Check your login info')
-        return 
-    }
-    setEmail('')
-    setPassword('')
-    keyboardHide()
-}
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
@@ -117,9 +102,7 @@ export default function LoginScreen({ navigation }) {
                       onBlur={() => setIsFocusedEmail(false)}
                       value={state.email}
                       onChangeText={(value) =>
-                        setState((prevState) => ({ ...prevState, email: value }))}       
-                      onSubmitEditing={() => passRef.current.focus()} 
-                      ref={emailRef}
+                        setState((prevState) => ({ ...prevState, email: value }))} 
                     />
               
                 <View style={styles.inputContainer}>
@@ -135,8 +118,6 @@ export default function LoginScreen({ navigation }) {
                           value={state.password}
                           onChangeText={(value) =>
                             setState((prevState) => ({ ...prevState, password: value }))}   
-                          onSubmitEditing={onSubmit} 
-                          ref={passRef}
                           />
                   <View style={styles.passwordIcon}>
                     <TouchableWithoutFeedback onPress={togglePasswordVisibility}>

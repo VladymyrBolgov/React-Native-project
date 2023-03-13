@@ -15,30 +15,24 @@ const MainTab = createBottomTabNavigator();
 export default function App() {
 
   return (
-    <>
-    <NavigationContainer>
-        <MainTab.Navigator>
-          <MainTab.Screen name='Posts' component={PostsScreen} />
-          <MainTab.Screen name='Create' component={CreatePostsScreen} />
-          <MainTab.Screen name='Profile' component={ProfileScreen} />
-        </MainTab.Navigator>
-    </NavigationContainer>
-  </>
+<>
+<NavigationContainer>
+  <Stack.Navigator>
+    <Stack.Screen options={{ headerShown: false }}  name="Register" component={RegistrationScreen} />
+    <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />  
+  </Stack.Navigator>
+</NavigationContainer>
+</>
+  //   <>
+  //     <RegistrationScreen/>
+  //   {/* <NavigationContainer>
+  //       <MainTab.Navigator>
+  //         <MainTab.Screen name='Posts' component={PostsScreen} />
+  //         <MainTab.Screen name='Create' component={CreatePostsScreen} />
+  //         <MainTab.Screen name='Profile' component={ProfileScreen} />
+  //       </MainTab.Navigator>
+  //   </NavigationContainer> */}
+  // </>
   );
 }
 // auth
-
-//  <Stack.Navigator>
-//           <Stack.Screen
-//            options={{
-//             headerShown: false,
-//           }}
-//             name="Register"
-//             component={RegistrationScreen} />
-//           <Stack.Screen
-//               options={{
-//             headerShown: false,
-//           }}
-//             name="Login"
-//             component={LoginScreen} />  
-//       </Stack.Navigator> 

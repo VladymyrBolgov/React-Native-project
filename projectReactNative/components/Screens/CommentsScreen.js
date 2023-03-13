@@ -1,16 +1,16 @@
-// import {
-//   StyleSheet,
-// } from "react-native";
+import {
+  StyleSheet,
+} from "react-native";
 
-// export default function CommentsScreen({ navigation }) {
+export default function CommentsScreen({ navigation }) {
   
-//     return (
-//   <></>
-//   );
-// }
-// const styles = StyleSheet.create({
-//   container: {
+    return (
+  <></>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
   
-//   },
+  },
 
-//   })
+  })
