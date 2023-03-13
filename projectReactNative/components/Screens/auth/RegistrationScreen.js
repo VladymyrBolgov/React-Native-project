@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import useTogglePassVisibility from "../../../hooks/useTogglePassVisibility"
+//import useTogglePassVisibility from "../../../hooks/useTogglePassVisibility"
+import { AntDesign } from '@expo/vector-icons';
 import {
   StyleSheet,
   ImageBackground,
@@ -76,18 +77,23 @@ export default function RegistrationScreen({ navigation }) {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={Keyboard.dismiss}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}
       onLayout={onLayoutRootView}>
       <View style={styles.container}>
-        <ImageBackground
-            style={styles.image}
-            source={require("../../../assets/images/PhotoBG.png")}>
-          <View style={styles.box}> 
+        <ImageBackground style={styles.image} source={require("../../../assets/images/PhotoBG.png")}>
+          {/* <View style={styles.box}>  */}
             {/* для поднятие над клавиатурой */}
-            <KeyboardAvoidingView 
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-              >
+            <KeyboardAvoidingView style={styles.box} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+             {/*  */}
+                <View style={styles.avatarContainer}>
+                    <View style={styles.avatar}>
+                       {/* Avatar upload  */}
+                    </View>
+                    <TouchableOpacity style={styles.addAvatarBtn}>
+                      <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
+                    </TouchableOpacity>
+                </View>
+             {/*  */}
               <Text style={styles.h1}>Регистрация</Text>
                {/* для поднятие над клавиатурой */}
               <View style={{...styles.form,
@@ -173,7 +179,7 @@ export default function RegistrationScreen({ navigation }) {
               </View>
               
             </KeyboardAvoidingView>
-          </View>   
+          {/* </View>    */}
         </ImageBackground>
       </View>
     </TouchableWithoutFeedback> 
@@ -193,18 +199,38 @@ const styles = StyleSheet.create({
   },
 
   box: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // width: 360, // костыль
+    // height: 549,
+    // marginTop: 205, // костыль
+    paddingHorizontal:16,
     borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    width: 360, // костыль
-    height: 549,
-    marginTop: 205, // костыль
+    borderTopRightRadius: 25,        
+    backgroundColor:'#FFFFFF',
   },
 
+  avatarContainer: {
+    position: 'absolute',
+    top: -60,
+    width: 120,
+    height: 120,
+    marginBottom: 32,
+    alignSelf: 'center',
+    borderRadius: 16,
+    backgroundColor: "#F6F6F6"
+},
+addAvatarBtn: {
+    position: "absolute",
+    right: -12,
+    bottom:14,
+    borderRadius:50,
+    backgroundColor:'#FFFFFF',
+    
+},
+
   h1: {
-    marginTop: 125, //костыль
+    marginTop: 92, 
     marginBottom: 33,
     fontFamily: 'Roboto-Medium',
     fontSize: 30,
@@ -288,22 +314,6 @@ const styles = StyleSheet.create({
     color: '#1B4371',
   },
 
-  PhotoContainer: {
-    position: "absolute",
-    width: 132,
-    height: 120,
-  },
-  Photo: {
- 
-    background: '#F6F6F6',
-    borderRadius: 16,
-    width: 120,
-    height: 120,
-  },
-  
-  PhotoContainer: {
-    
-  }
 });
 
 
