@@ -82,8 +82,8 @@ export default function LoginScreen({ navigation }) {
             style={styles.image}
             source={require("../../../assets/images/PhotoBG.png")}>
         
-          <View style={styles.box}>
-            <KeyboardAvoidingView
+          {/* <View style={styles.box}> */}
+            <KeyboardAvoidingView style={styles.box}
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Войти</Text>
@@ -149,7 +149,7 @@ export default function LoginScreen({ navigation }) {
                 
               </View>
             </KeyboardAvoidingView>
-          </View>
+          {/* </View> */}
             
         </ImageBackground>
       </View>
@@ -170,14 +170,16 @@ const styles = StyleSheet.create({
   },
 
   box: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // width: 360, // костыль
+    // height: 520,
+    // marginTop: 270, // костыль
+
+    paddingHorizontal:16,
     borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    width: 360, // костыль
-    height: 520,
-    marginTop: 270, // костыль
+    borderTopRightRadius: 25,        
+    backgroundColor:'#FFFFFF',
   },
 
   h1: {

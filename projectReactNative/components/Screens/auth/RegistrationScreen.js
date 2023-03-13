@@ -199,11 +199,6 @@ const styles = StyleSheet.create({
   },
 
   box: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    // width: 360, // костыль
-    // height: 549,
-    // marginTop: 205, // костыль
     paddingHorizontal:16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,        

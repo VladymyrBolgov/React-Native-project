@@ -24,14 +24,13 @@ export default function App() {
 </NavigationContainer>
 </>
   //   <>
-  //     <RegistrationScreen/>
-  //   {/* <NavigationContainer>
+  //    <NavigationContainer>
   //       <MainTab.Navigator>
   //         <MainTab.Screen name='Posts' component={PostsScreen} />
   //         <MainTab.Screen name='Create' component={CreatePostsScreen} />
   //         <MainTab.Screen name='Profile' component={ProfileScreen} />
   //       </MainTab.Navigator>
-  //   </NavigationContainer> */}
+  //   </NavigationContainer> 
   // </>
   );
 }
