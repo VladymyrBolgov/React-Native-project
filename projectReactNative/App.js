@@ -4,6 +4,7 @@ import LoginScreen from "./components/Screens/auth/LoginScreen";
 import PostsScreen from "./components/Screens/mainScreen/PostsScreen"
 import CreatePostsScreen from "./components/Screens/mainScreen/CreatePostsScreen";
 import ProfileScreen from "./components/Screens/mainScreen/ProfileScreen"
+import Home from "./components/Screens/Home";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -20,6 +21,7 @@ export default function App() {
   <Stack.Navigator>
     <Stack.Screen options={{ headerShown: false }}  name="Register" component={RegistrationScreen} />
     <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />  
+    {/* <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />  */}
   </Stack.Navigator>
 </NavigationContainer>
 </>
