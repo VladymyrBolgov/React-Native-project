@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+// import { useDispatch } from 'react-redux';
 import {
   StyleSheet,
   ImageBackground,
@@ -24,10 +25,9 @@ const initialState = {
 }
 
 export default function LoginScreen({ navigation }) {
-  console.log("navigation", navigation);
-   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-
+  // const dispatch = useDispatch();
   const [isFocusedEmail, setIsFocusedEmail] = useState(false)
   const [isFocusedPassword, setIsFocusedPassword] = useState(false)
 
@@ -74,25 +74,22 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={Keyboard.dismiss}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}
       onLayout={onLayoutRootView}>
       <View style={styles.container}>
-        <ImageBackground
-            style={styles.image}
+        <ImageBackground style={styles.image}
             source={require("../../../assets/images/PhotoBG.png")}>
-        
-          {/* <View style={styles.box}> */}
+      
+           {/* для поднятие над клавиатурой */}
             <KeyboardAvoidingView style={styles.box}
               behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
               <Text style={styles.h1}>Войти</Text>
-              <View style={{
-                ...styles.form,
+              <View style={{ ...styles.form,
                 marginBottom: isShowKeyboard ? 0 : 144,
                 width: dimensions}}>
-              
-              <TextInput
+            
+                    <TextInput
                       style={{...styles.input, borderColor: isFocusedEmail ? '#FF6C00' : '#E8E8E8'}}
                       placeholder="Адрес электронной почты"
                       keyboardType="email-address" 
@@ -106,8 +103,8 @@ export default function LoginScreen({ navigation }) {
                         setState((prevState) => ({ ...prevState, email: value }))} 
                     />
               
-                <View style={styles.inputContainer}>
-                <TextInput
+                    <View style={styles.inputContainer}>
+                      <TextInput
                           style={{...styles.inputPassword, borderColor: isFocusedPassword ? '#FF6C00' : '#E8E8E8'}}
                           placeholder="Пароль"
                           secureTextEntry={!isPasswordVisible}
@@ -145,12 +142,9 @@ export default function LoginScreen({ navigation }) {
                         Зарегистрироваться
                     </Text>
                   </TouchableOpacity>
-                </View>
-                
+                </View>  
               </View>
-            </KeyboardAvoidingView>
-          {/* </View> */}
-            
+            </KeyboardAvoidingView>    
         </ImageBackground>
       </View>
        </TouchableWithoutFeedback> 
@@ -166,16 +160,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
+    justifyContent: "flex-end",
     justifyContent: "center",
   },
 
   box: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    // width: 360, // костыль
-    // height: 520,
-    // marginTop: 270, // костыль
-
     paddingHorizontal:16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,        
