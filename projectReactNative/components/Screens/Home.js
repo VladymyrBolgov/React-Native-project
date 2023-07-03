@@ -8,13 +8,15 @@ import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
 
 const MainTab = createBottomTabNavigator();
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
+    
     return (
         <MainTab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarHideOnKeyboard: true,
             }}>
+            
             <MainTab.Screen
                 options={{
                     title: "Публикации",
